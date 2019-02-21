@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Product = ({ image, name, amount }) => (
   <div className="product">
@@ -7,5 +8,11 @@ const Product = ({ image, name, amount }) => (
     <h3>{name}</h3>
   </div>
 );
+
+Product.propTypes = {
+  name: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  amount: PropTypes.string.isRequired
+};
 
 export default Product;

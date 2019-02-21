@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Manufacture = ({ item, onChange, checked }) => {
   return (
@@ -16,4 +17,9 @@ const Manufacture = ({ item, onChange, checked }) => {
   );
 };
 
+Manufacture.propTypes = {
+  item: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  checked: PropTypes.string.isRequired
+};
 export default Manufacture;

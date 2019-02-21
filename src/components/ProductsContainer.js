@@ -1,7 +1,7 @@
 import React from "react";
 
-const ProductsContainer = props => {
-  return <div className="products">{props.children}</div>;
+const ProductsContainer = ({ children }) => {
+  return <div className="products">{children}</div>;
 };
 
 export default ProductsContainer;
