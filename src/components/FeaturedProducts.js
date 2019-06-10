@@ -1,23 +1,17 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Product from "./Product";
-import ProductService from "../services/products.services";
 import SmallHeading from "./SmallHeading";
 import ProductContainers from "./ProductsContainer";
+import { getProducts } from "../actions/products";
 
 class FeaturedProducts extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      products: []
-    };
-  }
-
   componentDidMount() {
-    const products = ProductService.getProductByCategory(this.props.category);
-    this.setState({
-      products
-    });
+    this.props.getProducts();
+    // const products = ProductService.getProductByCategory(this.props.category);
+    // this.setState({
+    //   products
+    // });
   }
 
   render() {
@@ -25,7 +19,7 @@ class FeaturedProducts extends Component {
       <div>
         <SmallHeading text={this.props.heading} />
         <ProductContainers>
-          {this.state.products.map(product => (
+          {this.props.products.map(product => (
             <Product key={product.id} {...product} />
           ))}
         </ProductContainers>
@@ -34,4 +28,14 @@ class FeaturedProducts extends Component {
   }
 }
 
-export default FeaturedProducts;
+const mapStateToProps = (state, ownProps) => ({
+  products: state.product.data.filter(
+    product =>
+      product.category === ownProps.category && product.featured === true
+  )
+});
+
+export default connect(
+  mapStateToProps,
+  { getProducts: getProducts }
+)(FeaturedProducts);
