@@ -10,10 +10,35 @@ class ProductList extends React.Component {
     this.props.getProducts();
   }
 
+  get products() {
+    const { manufacture, search, products } = this.props
+
+    if(manufacture && search) {
+      return products.filter(
+        product =>
+          product.manufacture === manufacture && product.name.toLowerCase().includes(search.toLowerCase())
+      )
+    }
+    if(manufacture) {
+      return products.filter(
+        product =>
+          product.manufacture === manufacture
+      )
+    }
+    if(search) {
+      return products.filter(
+        product =>
+          product.name.toLowerCase().includes(search.toLowerCase())
+      )
+    }
+
+    return products
+  }
+
   render() {
     return (
       <ProductsContainer>
-        {this.props.products.map(product => (
+        {this.products.map(product => (
           <Product key={product.id} {...product} />
         ))}
       </ProductsContainer>
@@ -22,7 +47,9 @@ class ProductList extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { products: state.product.data };
+  return {
+    products: state.product.data,
+  };
 };
 
 export default connect(

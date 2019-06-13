@@ -8,10 +8,6 @@ import { getProducts } from "../actions/products";
 class FeaturedProducts extends Component {
   componentDidMount() {
     this.props.getProducts();
-    // const products = ProductService.getProductByCategory(this.props.category);
-    // this.setState({
-    //   products
-    // });
   }
 
   render() {

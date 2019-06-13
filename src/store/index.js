@@ -2,7 +2,7 @@ import { combineReducers, createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 
 import productReducer from "../reducers/products";
-// import cartReducer from "../cart/cartReducer";
+import cartReducer from "../reducers/cart";
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
   ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
@@ -10,8 +10,8 @@ const devTools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
 
 const store = createStore(
   combineReducers({
-    product: productReducer
-    // cart: cartReducer
+    product: productReducer,
+    cart: cartReducer
   }),
   compose(
     applyMiddleware(thunk),

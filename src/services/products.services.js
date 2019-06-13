@@ -1,18 +1,24 @@
-import products from "../products";
+import axios from "axios";
 
 class ProductsServices {
   static getProducts() {
-    return products;
+    return axios
+      .get("http://react2018-shop.s3-website-eu-west-1.amazonaws.com/")
+      .then(({ data }) => data);
   }
 
   static getProductByCategory(category) {
-    return products.filter(
-      product => product.category === category && product.featured === true
+    return ProductsServices.getProducts().then(products =>
+      products.filter(
+        product => product.category === category && product.featured === true
+      )
     );
   }
 
   static getManufactures() {
-    return [...new Set(products.map(product => product.manufacture).sort())];
+    return ProductsServices.getProducts()
+      .then(products => products.map(product => product.manufacture).sort())
+      .then(products => Array.from(new Set(products)));
   }
 }
 

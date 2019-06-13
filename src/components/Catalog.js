@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import BigHeading from "./BigHeading";
 import ProductList from "./ProductList";
 import ProductContainer from "./ProductsContainer";
-import ProductService from "../services/products.services";
 import Manufacturer from "./Manufacture";
+import { connect } from "react-redux";
+import { getProducts } from "../actions/products";
 
 class Catalog extends Component {
   constructor(props) {
@@ -11,8 +12,7 @@ class Catalog extends Component {
 
     this.state = {
       inputSearch: "",
-      selected: "All",
-      manufactures: []
+      selected: "All"
     };
 
     this.handleManufactureChange = this.handleManufactureChange.bind(this);
@@ -20,15 +20,11 @@ class Catalog extends Component {
   }
 
   componentDidMount() {
-    const manufactures = ProductService.getManufactures();
-
-    this.setState({
-      manufactures
-    });
+    this.props.getProducts();
   }
 
   get manufactures() {
-    return ["All", ...this.state.manufactures];
+    return ["All", ...this.props.manufacturers];
   }
 
   handleClearFilters() {
@@ -96,4 +92,11 @@ class Catalog extends Component {
   }
 }
 
-export default Catalog;
+const mapStateToProps = state => ({
+  manufacturers: state.product.manufacturers || []
+});
+
+export default connect(
+  mapStateToProps,
+  { getProducts: getProducts }
+)(Catalog);

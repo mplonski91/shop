@@ -1,7 +1,9 @@
 const initalState = {
   isFeching: false,
   isFetched: false,
-  data: []
+  data: [],
+  manufacturers: [],
+  selected: ''
 };
 
 export default (state = initalState, action) => {
@@ -19,7 +21,8 @@ export default (state = initalState, action) => {
         ...state,
         isFeching: false,
         isFetched: true,
-        data: payload.data
+        data: payload.data,
+        manufacturers: payload.manufacturers,
       };
     }
     case "GET_PRODUCTS_FAILURE": {

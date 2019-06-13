@@ -1,18 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux"
-import {addProductToCart} from "../actions/cart";
+import {removeProductFromCart} from "../actions/cart";
 
-const Product = ({ id, image, name, amount, addProductToCart }) => (
+const CartProduct = ({ id, image, name, amount, quantity, removeProductFromCart }) => (
   <div className="product">
     <img src={image} alt={name} />
     <p className="price">{amount}</p>
     <h3>{name}</h3>
-    <a onClick={() => addProductToCart(id)}>Add to cart</a>
+    <p>Quantity: {quantity}</p>
+    <a onClick={() => removeProductFromCart(id)}>Remove from cart</a>
   </div>
 );
 
-Product.propTypes = {
+CartProduct.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
@@ -20,5 +21,5 @@ Product.propTypes = {
 };
 
 export default connect(null, {
-  addProductToCart
-})(Product);
+  removeProductFromCart
+})(CartProduct);

@@ -40,6 +40,12 @@ body {
   background-color: #0b102b;
 }
 
+.navbar > .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .nav {
   padding: 0;
   margin: 0;
@@ -61,6 +67,9 @@ body {
 }
 
 /* Navbars */
+.cart_link {
+  color: #fff
+}
 
 /* Footer */
 footer {
@@ -136,3 +145,27 @@ footer {
 }
 
 /* Catalog */
+
+.product{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.product a {
+  background: black;
+  color: white;
+  cursor: pointer;
+  padding: 10px 15px;
+  display: block;
+  position: relative;
+  border: 2px solid #000;
+  transition: .5s;
+}
+
+.product a:hover{
+  background: #fff;
+  color: #000;
+  border: 2px solid #000;
+  transform: tr
+}

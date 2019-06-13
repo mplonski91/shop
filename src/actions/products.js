@@ -1,26 +1,32 @@
-import axios from "axios";
+import ProductsService from '../services/products.services'
 
 const getProductsRequest = () => ({
   type: "GET_PRODUCTS_REQUEST"
 });
 
-const getProductsSuccess = data => ({
+const getProductsSuccess = (data, manufacturers) => ({
   type: "GET_PRODUCTS_SUCCESS",
   payload: {
-    data
+    data,
+    manufacturers
   }
 });
 
-const getProductsFailure = () => ({
-  type: "GET_PRODUCTS_FAILURE"
+const getProductsFailure = error => ({
+  type: "GET_PRODUCTS_FAILURE",
+  error,
 });
 
 export const getProducts = () => dispatch => {
   dispatch(getProductsRequest());
 
-  axios
-    .get("https://api.jsonbin.io/b/5cf311bee36bab4cf3101423")
-    .then(({ data }) => {
-      dispatch(getProductsSuccess(data));
-    });
+  ProductsService.getProducts()
+    .then(products => {
+      const manufacturers = Array.from(new Set(products
+        .map(product => product.manufacture)
+        .sort()))
+
+      dispatch(getProductsSuccess(products, manufacturers));
+    })
+    .catch(err => dispatch(getProductsFailure(err)));
 };

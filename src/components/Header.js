@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Container from "./Container";
+import CartLink from "./CartLink";
 
 const Header = () => (
   <nav className="navbar">
@@ -21,7 +22,13 @@ const Header = () => (
             About
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/cart" activeClassName="is-active">
+            Cart
+          </NavLink>
+        </li>
       </ul>
+      <CartLink />
     </Container>
   </nav>
 );

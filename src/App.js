@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Catalog from "./components/Catalog";
 import About from "./components/About";
+import Cart from './components/Cart';
 import "./App.css";
 
 class App extends Component {
@@ -23,6 +24,7 @@ class App extends Component {
                 <Route path="/" component={Home} exact />
                 <Route path="/catalog" component={Catalog} exact />
                 <Route path="/about" component={About} />
+                <Route path="/cart" component={Cart} />
               </Switch>
             </Container>
             <Footer />
